@@ -1,6 +1,7 @@
 package main
 
 import (
+	"html"
 	"net/http"
 	"fmt"
 	"regexp"
@@ -31,6 +32,7 @@ func url(msg Message) {
 					if len(str) < 5 { return }
 					str = str[7:]
 					str = strings.Replace(str,"</title>","",-1)
+					str = html.UnescapeString(str)
 					send(Message{
 						Command: MESSAGE,
 						Target:  msg.Target,

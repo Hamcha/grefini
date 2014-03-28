@@ -1,2 +1,14 @@
 goclient
 goproxy
+flotrshi
+markovlog
+quotes.json
+macros.json
+*.cer
+*.pem
+twitter*
+*~
+*.pyc
+mods/node_modules/
+mods/logs/
+flport

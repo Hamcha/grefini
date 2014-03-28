@@ -1,9 +1,0 @@
-./flotrshi
-./markovlog
-quotes.json
-macros.json
-*.cer
-*.pem
-twitter*
-*~
-*.pyc
