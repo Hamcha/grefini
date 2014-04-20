@@ -31,7 +31,7 @@ func quote(msg Message) {
 				n, err = strconv.Atoi(parts[1])
 				if err != nil {
 					send(Message{
-						Command:MESSAGE, 
+						Command:MESSAGE,
 						Target:	msg.Target,
 						Text:	"FUK U "+msg.Source.Nickname,
 					})
