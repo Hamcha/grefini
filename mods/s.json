@@ -2,7 +2,7 @@
 	"*" : [
 		"si ma cosa c'entro io in tutto questo?",
 		"^",
-		"no non compro nulla"
+		"no non compro nulla",
 	],
 	"Hamcha" : [
 		"sempre a parlare klingon, eh?",
@@ -17,11 +17,13 @@
 	],
 	"BigJackintosh" : [
 		"quando hai ragione hai ragione",
-		"BJ, vai a zappare la terra"
+		"BJ, vai a zappare la terra",
+		"ma hanno leakato la nuova puntata?!"
 	],
 	"DarkSideOfLuna" : [
 		"oddio e' uscita la nuova cyanogenmod ciccafritta",
-		"ma non dovresti studiare medicina?"
+		"ma non dovresti studiare medicina?",
+		"Twilight best pony"
 	],
 	"elmdor" : [
 		"e se poi te ne penti?"
@@ -38,5 +40,9 @@
 	],
 	"DT" : [
 		"( °-°)/ < posso andare in bagno?"
+	],
+	"Dobaru" : [
+		"Saluta, ogni tanto, eh!",
+		"0/10"
 	]
 }
