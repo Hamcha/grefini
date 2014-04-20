@@ -1,4 +1,9 @@
 {
+	"*" : [
+		"si ma cosa c'entro io in tutto questo?",
+		"^",
+		"no non compro nulla"
+	],
 	"Hamcha" : [
 		"sempre a parlare klingon, eh?",
 		"poi mi spiegherete come fate a dare retta ad un rarifag..",
@@ -8,12 +13,11 @@
 	"Shadowman" : [
 		"il punto rimane che PSVita non e' messa cosi' male",
 		"fregatene dei brony, Shadowman!",
-		"no spoiler plz",
-		"si ma cosa c'entro io in tutto questo?"
+		"no spoiler plz"
 	],
 	"BigJackintosh" : [
 		"quando hai ragione hai ragione",
-		"^"
+		"BJ, vai a zappare la terra"
 	],
 	"DarkSideOfLuna" : [
 		"oddio e' uscita la nuova cyanogenmod ciccafritta",
@@ -26,13 +30,13 @@
 		"comunque io non ho capito nulla"
 	],
 	"Auster" : [
-		"E' risorto l'austerione furente!",
-		"^"
+		"E' risorto l'austerione furente!"
 	],
 	"FlAtterguy" : [
-		"non fai ridere nessuno, FlA"
+		"non fai ridere nessuno, FlA",
+		"Bau"
 	],
 	"DT" : [
-		"(o.o)/ < posso andare in bagno?"
+		"( °-°)/ < posso andare in bagno?"
 	]
 }
