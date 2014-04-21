@@ -29,8 +29,8 @@ func initmeta() {
 func meta(msg Message) {
 	if msg.Command == MESSAGE {
 		if msg.Text == "!metafora" {
-			n := rand.Intn(len(actions))
-			m := rand.Intn(len(objects))
+			n := rand.Intn(len(actions)-1)
+			m := rand.Intn(len(objects)-1)
 			send(Message{
 				Command: MESSAGE,
 				Target : msg.Target,

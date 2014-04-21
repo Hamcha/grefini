@@ -20,7 +20,7 @@ func initrandst() {
 }
 
 const PROBOF = 2
-const PROBIN = 10
+const PROBIN = 20
 
 func randst(msg Message) {
 	if (msg.Command == MESSAGE) {
@@ -31,7 +31,7 @@ func randst(msg Message) {
 			} else {
 				msgs = randstX["*"]
 			}
-			idx := rand.Intn(len(msgs))
+			idx := rand.Intn(len(msgs)-1)
 			msx := msgs[idx]
 			send(Message{
 				Command: MESSAGE,
