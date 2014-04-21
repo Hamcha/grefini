@@ -45,7 +45,6 @@ func handle(msg Message) {
 	meta(msg)
 	doge(msg)
 	url(msg)
-	logSearch(msg)
 	sed(msg)
 	mamma(msg)
 	randst(msg)
