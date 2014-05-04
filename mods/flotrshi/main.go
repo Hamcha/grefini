@@ -34,7 +34,8 @@ func initmods() {
 	initurl()
 	initsed()
 	initmamma()
-	initrandst()
+	//initrandst()
+	initcount()
 	fmt.Println("flotrshi-port - All modules loaded!")
 }
 
@@ -47,7 +48,8 @@ func handle(msg Message) {
 	url(msg)
 	sed(msg)
 	mamma(msg)
-	randst(msg)
+	count(msg)
+	//randst(msg)
 }
 
 func main () {

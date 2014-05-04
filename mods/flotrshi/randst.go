@@ -20,7 +20,7 @@ func initrandst() {
 }
 
 const PROBOF = 2
-const PROBIN = 20
+const PROBIN = 50
 
 func randst(msg Message) {
 	if (msg.Command == MESSAGE) {
