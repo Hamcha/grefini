@@ -20,7 +20,7 @@ func initurl() {
 	re2 = regexp.MustCompile("<title>(.*)</title>")
 }
 
-func url(msg Message) {
+func urldo(msg Message) {
 	if msg.Command == MESSAGE {
 		if msg.Text == "!last" {
 			send(Message{
