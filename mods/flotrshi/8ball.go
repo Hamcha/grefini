@@ -15,7 +15,7 @@ func ball(msg Message) {
 	if msg.Command == MESSAGE {
 		if len(msg.Text) < 10 { return }
 		if msg.Text[0:10] == "secondo te" {
-			n := rand.Intn(len(replies)-1)
+			n := rand.Intn(len(replies))
 			send(Message{
 				Command: MESSAGE,
 				Target : msg.Target,

@@ -14,9 +14,9 @@ func initmamma() {
 
 func mamma(msg Message) {
 	if msg.Command == MESSAGE {
-		if len(msg.Text) < 6 { return }
-		if msg.Text[0:6] == "!mamma" {
-			n := rand.Intn(len(mreplies)-1)
+		if len(msg.Text) < 7 { return }
+		if msg.Text[0:7] == "!mamma " {
+			n := rand.Intn(len(mreplies))
 			final := strings.Replace(mreplies[n],"X",msg.Text[7:],-1)
 			if strings.Index(mreplies[n],"Y") >= 0 {
 				final = strings.Replace(mreplies[n],"Y",strings.ToUpper(msg.Text[7:]),1)

@@ -16,6 +16,7 @@ func iniths() {
 
 func hs(msg Message) {
 	if msg.Command == MESSAGE {
+		if len(msg.Text) < 3 { return }
 		if msg.Text[0:3] == "hs " {
 			resp, err := http.PostForm(hsurl, url.Values{"exp":{msg.Text[3:]}})
 			if err == nil {
