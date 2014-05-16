@@ -73,6 +73,45 @@ func quote(msg Message) {
 			savequote()
 			return
 		}
+		if parts[0] == "!search" {
+			if len(parts) < 2 {
+				send(Message{
+					Command:MESSAGE,
+					Target: msg.Target,
+					Text:   "FUK U "+msg.Source.Nickname,
+				})
+			}
+			patt := strings.ToLower(msg.Text[8:])
+			lst := make([]int,0)
+			for i,v := range quotes {
+				if strings.Index(strings.ToLower(v),patt) >= 0 {
+					lst = append(lst,i)
+				}
+			}
+			if len(lst) == 0 {
+				send(Message{
+					Command:MESSAGE,
+					Target: msg.Target,
+					Text:   "Nessuna quote trovata :(",
+				})
+			} else if len(lst) == 1 {
+				send(Message{
+					Command:MESSAGE,
+					Target: msg.Target,
+					Text:   "Quote #"+strconv.Itoa(lst[0]+1)+": "+quotes[lst[0]],
+				})
+			} else {
+				out := make([]string,len(lst))
+				for i := range lst {
+					out[i] = strconv.Itoa(lst[i])
+				}
+				send(Message{
+					Command:MESSAGE,
+					Target: msg.Target,
+					Text:   "Trovato nelle quote: "+strings.Join(out,","),
+				})
+			}
+		}
 	}
 }
 
