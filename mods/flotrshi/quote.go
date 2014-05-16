@@ -98,7 +98,7 @@ func quote(msg Message) {
 				send(Message{
 					Command:MESSAGE,
 					Target: msg.Target,
-					Text:   "Quote #"+strconv.Itoa(lst[0])+": "+quotes[lst[0]+1],
+					Text:   "Quote #"+strconv.Itoa(lst[0])+": "+quotes[lst[0]-1],
 				})
 			} else {
 				out := make([]string,len(lst))
