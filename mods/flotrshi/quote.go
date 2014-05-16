@@ -85,7 +85,7 @@ func quote(msg Message) {
 			lst := make([]int,0)
 			for i,v := range quotes {
 				if strings.Index(strings.ToLower(v),patt) >= 0 {
-					lst = append(lst,i)
+					lst = append(lst,i+1)
 				}
 			}
 			if len(lst) == 0 {
