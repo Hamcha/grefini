@@ -62,7 +62,7 @@ func quote(msg Message) {
 					Text:	"FUK U "+msg.Source.Nickname,
 				})
 			}
-			quote := msg.Text[9:]
+			quote := msg.Text[10:]
 			quotes = append(quotes,quote)
 			qid := len(quotes)
 			send(Message{
