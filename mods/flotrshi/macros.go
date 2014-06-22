@@ -49,6 +49,7 @@ func macro(msg Message) {
 					Target:	msg.Target,
 					Text:	"fuk u "+msg.Source.Nickname,
 				})
+				return
 			}
 			name := parts[1]
 			value := parts[2]
