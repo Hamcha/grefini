@@ -38,7 +38,7 @@ func quote(msg Message) {
 					return
 				}
 				n = n-1
-				if n >= len(quotes) || n < 1 {
+				if n >= len(quotes) || n < 0 {
 					send(Message{
 						Command:MESSAGE,
 						Target: msg.Target,
