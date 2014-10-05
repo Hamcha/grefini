@@ -15,7 +15,7 @@ func markov(msg Message) {
 		if len(msg.Text) < 8 { return }
 		if msg.Text[0:6] == "!talk " {
 			nick := msg.Text[6:]
-			if strings.ContainsAny(nick, "; & . : > <") {
+			if strings.ContainsAny(nick, "; & , . : > < ` # % $ ( ) [ ] { } \" \\ /") {
 				send(Message{
 					Target: msg.Target,
 					Command: MESSAGE,

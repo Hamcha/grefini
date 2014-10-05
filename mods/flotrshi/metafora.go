@@ -6,7 +6,7 @@ import (
 )
 
 var actions []string = []string{
-    "Puppami", "Degustami", "Lucidami", "Manipolami", "Disidratami", "Irritami", "Martorizzami", 
+    "Puppami", "Degustami", "Lucidami", "Manipolami", "Disidratami", "Irritami", "Martorizzami",
     "Lustrami", "Osannami", "Sorseggiami", "Assaporami", "Apostrofami", "Spremimi", "Dimenami",
     "Agitami", "Stimolami", "Suonami", "Strimpellami", "Stuzzicami", "Spintonami", "Sguinzagliami",
     "Modellami", "Sgrullami", "Cavalcami", "Perquotimi", "Misurami", "Sventolami", "Induriscimi",

@@ -35,6 +35,7 @@ func initmods() {
 	initsed()
 	initmamma()
 	iniths()
+	initmarkov()
 	//initrandst()
 	initcount()
 	fmt.Println("flotrshi-port - All modules loaded!")
@@ -51,6 +52,7 @@ func handle(msg Message) {
 	mamma(msg)
 	count(msg)
 	hs(msg)
+	markov(msg)
 	//randst(msg)
 }
 
