@@ -23,7 +23,7 @@ func markov(msg Message) {
 				})
 				return
 			}
-			out, err := exec.Command("zsh", "-c", "cat /usr/home/znc-admin/.znc/users/Hamcha/moddata/log/logs/ponychat_* | grep -i \\<\\*"+nick+"\\> | cut -d \" \" -f3- | sort -R | ./markov -words 10").Output()
+			out, err := exec.Command("zsh", "-c", "cat /usr/home/znc-admin/.znc/users/Hamcha/moddata/log/logs/ponychat_* | grep -i \"] <\"\\*"+nick+"\\> | cut -d \" \" -f3- | sort -R | ./markov -words 10").Output()
 			if err != nil {
 				fmt.Println(err.Error())
 				send(Message{
