@@ -16,8 +16,8 @@ var lastAuthor string
 var lastLinkName string
 func initurl() {
 	fmt.Println("Url Scraper READY!")
-	re  = regexp.MustCompile("http\\S*|www.\\S*")
-	re2 = regexp.MustCompile("<title>(.*)</title>")
+	re  = regexp.MustCompile("(?i)http\\S*|www.\\S*")
+	re2 = regexp.MustCompile("(?i)<title>(.*)</title>")
 }
 
 func urldo(msg Message) {
@@ -52,6 +52,7 @@ func urldo(msg Message) {
 					if len(str) < 5 { return }
 					str = str[7:]
 					str = strings.Replace(str,"</title>","",-1)
+					str = strings.Replace(str,"</TITLE>","",-1)
 					str = html.UnescapeString(str)
 					lastLinkName = str
 					send(Message{

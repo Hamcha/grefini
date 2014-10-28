@@ -40,6 +40,13 @@ func viaggi(msg Message) {
 				json.Unmarshal(body, &outjson)
 				var moreeco Romeroute
 				var lesstim Romeroute
+				if len(outjson.Routes) < 1 {
+					send(Message{
+						Command: MESSAGE,
+						Target: msg.Target,
+						Text: "wtf something's not right",
+					})
+				}
 				// Calculate cheapest and fastest
 				moreeco = outjson.Routes[0]
 				lesstim = outjson.Routes[0]
