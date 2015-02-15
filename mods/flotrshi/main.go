@@ -81,5 +81,5 @@ func main () {
 
 func send(msg Message) {
 	bytes, _ := json.Marshal(msg)
-	fmt.Fprintf(sock,string(bytes)+"\r\n")
+	fmt.Fprintln(sock,string(bytes)+"\r\n")
 }

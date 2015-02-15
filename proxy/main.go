@@ -58,14 +58,14 @@ func handleMod(c net.Conn, bot net.Conn) {
 	for {
 		bytes, _, err := b.ReadLine()
 		if err != nil {	break }
-		fmt.Fprintf(bot, string(bytes)+"\r\n")
+		fmt.Fprintln(bot, string(bytes)+"\r\n")
 	}
 	removeCon(c)
 }
 
 func broadcast(message string) {
 	for _,c := range mods {
-		_, err := fmt.Fprintf(c,message+"\r\n")
+		_, err := fmt.Fprintln(c,message+"\r\n")
 		if err != nil { removeCon(c) }
 	}
 }

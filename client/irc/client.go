@@ -101,7 +101,7 @@ func handle (c Client, parts []string, text string, pc net.Conn) {
 	if err != nil { 
 		fmt.Printf("CAN'T SEND TO PROXY: %s\r\n",err.Error())
 	} else {
-		fmt.Fprintf(pc,string(json)+"\r\n")
+		fmt.Fprintln(pc,string(json)+"\r\n")
 	}
 }
 
