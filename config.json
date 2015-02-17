@@ -1,0 +1,32 @@
+{
+	"Listen" : "127.0.0.1:8012",
+	"Servers": {
+		"ponychat" : {
+			"ServName" : "Ponychat",
+			"Address"  : "irc.ponychat.net:6667",
+			"Username" : "grefini",
+			"Nickname" : "grefini",
+			"Altnick"  : "grafene",
+			"Realname" : "Grefini 2.0",
+			"Channels" : ["#maud"]
+		},
+		"azzurra" : {
+			"ServName" : "Azzurra",
+			"Address"  : "irc.eu.azzurra.org:6667",
+			"Username" : "bottone",
+			"Nickname" : "bottone",
+			"Altnick"  : "bottana",
+			"Realname" : "bottone",
+			"Channels" : ["#jacksoftszone"]
+		},
+		"espernet" : {
+			"ServName" : "Espernet",
+			"Address"  : "irc.esper.net:6667",
+			"Username" : "maille",
+			"Nickname" : "maille",
+			"Altnick"  : "maille~",
+			"Realname" : "maille",
+			"Channels" : ["#mayo"]
+		}
+	}
+}

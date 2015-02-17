@@ -8,10 +8,6 @@ import (
 
 var mreplies []string = []string { "X non da sbocchi", "Con te non faremo gli stessi errori che abbiamo fatto con X", "Vai a studiare X!" , "Finirai a spalare X!", "X ti ha rincoglionito!", "Non ti meriti X", "Tuo padre lavora tutto il giorno e tu, invece, fai X", "DOV'E' Y?", "EH MA NON E' ORA CHE TI TROVI Y?!" }
 
-func initmamma() {
-	fmt.Println("Mamma di Jhy pronta! (!mamma)")
-}
-
 func mamma(msg Message) {
 	if msg.Command == MESSAGE {
 		if len(msg.Text) < 7 { return }

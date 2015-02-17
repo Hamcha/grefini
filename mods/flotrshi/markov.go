@@ -6,10 +6,6 @@ import (
 	"os/exec"
 )
 
-func initmarkov() {
-	fmt.Println("Markov pronto! (!talk)")
-}
-
 func markov(msg Message) {
 	if msg.Command == MESSAGE {
 		if len(msg.Text) < 8 { return }

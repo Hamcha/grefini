@@ -20,45 +20,55 @@ type Message struct {
 	Text	 string
 }
 
+type ClientMessage struct {
+	ServerId string
+	Message  Message
+	DateTime int64
+}
+
 const MESSAGE = "PRIVMSG"
 const NOTICE  = "NOTICE"
 
 var sock net.Conn
+var modmap map[string][]func(string, Message)
 
 func initmods() {
-	initquote()
-	initmacro()
-	initball()
-	initmeta()
+	initquote("ponychat")
+
+	initmacro("ponychat")
+	initmacro("azzurra")
+	initmacro("espernet")
+
 	initviaggi()
 	initurl()
 	initsed()
-	initmamma()
-	iniths()
-	initmarkov()
-	//initrandst()
-	initcount()
+
+	inittime("espernet")
+	initmock("espernet")
+	
 	fmt.Println("flotrshi-port - All modules loaded!")
 }
 
-func handle(msg Message) {
-	quote(msg)
-	macro(msg)
-	ball(msg)
-	meta(msg)
-	viaggi(msg)
-	urldo(msg)
-	sed(msg)
-	mamma(msg)
-	count(msg)
-	hs(msg)
-	markov(msg)
-	//randst(msg)
+func handle(sid string, msg Message) {
+	mods, ok := modmap[sid]
+	if !ok {
+		return
+	}
+
+	for i := range mods {
+		mods[i](sid, msg)
+	}
 }
 
 func main () {
 	// Init flotrshi-port modules
 	initmods()
+
+	// Make map
+	modmap = make(map[string][]func(string, Message))
+	modmap["ponychat"] = { quote, macro, ball, meta, viaggi, urldo, sed, mamma, hs, markov }
+	modmap["espernet"] = { macro, urldo, sed, hs, markov, time, mock }
+	modmap["azzurra"]  = { macro, meta, viaggi, urldo, sed, hs, markov }
 
 	// Connect to the proxy
 	var err error
@@ -71,15 +81,20 @@ func main () {
 		bytes, _, err := in.ReadLine()
 		if err != nil { break }
 
-		var msg Message
-		err = json.Unmarshal(bytes,&msg)
+		var msg ClientMessage
+		err = json.Unmarshal(bytes, &msg)
 		if err != nil { fmt.Printf("ERROR reading JSON: %s\r\n",err.Error()) }
 		// Dispatch to flotrshi-port modules
-		handle(msg)
+		handle(msg.ServerId, msg.Message)
 	}
 }
 
-func send(msg Message) {
-	bytes, _ := json.Marshal(msg)
+func send(servid string, msg Message) {
+	srvmsg = ClientMessage{
+		ServerId: servid,
+		Message:  msg,
+		DateTime: 0,
+	}
+	bytes, _ := json.Marshal(srvmsg)
 	fmt.Fprintln(sock,string(bytes)+"\r\n")
 }

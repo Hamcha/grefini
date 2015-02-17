@@ -10,10 +10,6 @@ import (
 
 var hsurl string = "http://tryhaskell.org/eval"
 
-func iniths() {
-	fmt.Println("Haskell mod loaded! (hs <expr>)")
-}
-
 func hs(msg Message) {
 	if msg.Command == MESSAGE {
 		if len(msg.Text) < 3 { return }

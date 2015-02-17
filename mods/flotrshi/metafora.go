@@ -22,10 +22,6 @@ var objects []string = []string{
     "il trenino",
 }
 
-func initmeta() {
-	fmt.Println("Metafore is ready! (!metafora)")
-}
-
 func meta(msg Message) {
 	if msg.Command == MESSAGE {
 		if msg.Text == "!metafora" {
