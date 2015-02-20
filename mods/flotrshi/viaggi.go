@@ -18,7 +18,7 @@ func initviaggi() {
 	fmt.Println("Rome2rio loaded! (!go X -> Y)")
 }
 
-func viaggi(msg Message) {
+func viaggi(sid string, msg Message) {
 	if msg.Command == MESSAGE {
 		msgs := reg.FindStringSubmatch(msg.Text)
 		if len(msgs) > 2 {
@@ -30,7 +30,7 @@ func viaggi(msg Message) {
 				defer resp.Body.Close()
 				body, _ := ioutil.ReadAll(resp.Body)
 				if len(body) < 10 {
-					send(Message{
+					send(sid, Message{
 						Command: MESSAGE,
 						Target: msg.Target,
 						Text: "fak u",
@@ -41,7 +41,7 @@ func viaggi(msg Message) {
 				var moreeco Romeroute
 				var lesstim Romeroute
 				if len(outjson.Routes) < 1 {
-					send(Message{
+					send(sid, Message{
 						Command: MESSAGE,
 						Target: msg.Target,
 						Text: "wtf something's not right",
@@ -58,24 +58,24 @@ func viaggi(msg Message) {
 						lesstim = v
 					}
 				}
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target : msg.Target,
 					Text   : "Viaggio da "+
 							 outjson.Places[0].Name+
 							 " a "+outjson.Places[1].Name,
 				})
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target : msg.Target,
 					Text   : "Piu economico: " + moreeco.Name + " (" + parseData(moreeco) + ")",
 				})
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target : msg.Target,
 					Text   : "Piu veloce: " + lesstim.Name + " (" + parseData(lesstim) + ")",
 				})
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target : msg.Target,
 					Text   : "Info: http://www.rome2rio.com/it/s/" + src + "/" + dst,

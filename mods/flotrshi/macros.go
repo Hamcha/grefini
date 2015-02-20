@@ -7,21 +7,26 @@ import (
 	"strings"
 )
 
-var macros map[string]string
+var macros map[string]map[string]string
 
-func initmacro() {
-	bytes, _ := ioutil.ReadFile("macros.json")
-	json.Unmarshal(bytes,&macros)
+func initmacro(sid string) {
+	if macros == nil {
+		macros = make(map[string]map[string]string)
+	}
+	bytes, _ := ioutil.ReadFile("macros."+sid+".json")
+	var macrosFile map[string]string
+	json.Unmarshal(bytes,&macrosFile)
+	macros[sid] = macrosFile
 
-	fmt.Println("Macro module loaded! (!macro)")
+	fmt.Println("Loaded macros for '"+sid+"'")
 }
 
-func macro(msg Message) {
+func macro(sid string, msg Message) {
 	if (msg.Command == MESSAGE) {
 		parts := strings.Split(msg.Text, " ")
 		if parts[0] == "!macro" {
 			if len(parts) < 2 {
-				send(Message{
+				send(sid, Message{
 					Command:MESSAGE, 
 					Target:	msg.Target,
 					Text:	"fuk u "+msg.Source.Nickname,
@@ -29,13 +34,13 @@ func macro(msg Message) {
 				return
 			}
 			var out string
-			if macros[parts[1]] == "" {
+			if macros[sid][parts[1]] == "" {
 				out = "Macro inesistente"
 			} else {
-				out = macros[parts[1]]
+				out = macros[sid][parts[1]]
 			}
 
-			send(Message{
+			send(sid, Message{
 				Command:MESSAGE,
 				Target: msg.Target,
 				Text:	msg.Source.Nickname+": "+out,
@@ -44,7 +49,7 @@ func macro(msg Message) {
 		}
 		if parts[0] == "!addmacro" {
 			if len(parts) < 3 {
-				send(Message{
+				send(sid, Message{
 					Command:MESSAGE,
 					Target:	msg.Target,
 					Text:	"fuk u "+msg.Source.Nickname,
@@ -53,24 +58,24 @@ func macro(msg Message) {
 			}
 			name := parts[1]
 			value := parts[2]
-			macros[name] = value
-			send(Message{
+			macros[sid][name] = value
+			send(sid, Message{
 				Command:MESSAGE,
 				Target:	msg.Target,
 				Text:	"Macro '"+name+"' aggiunta!",
 			})
-			savemacros()
+			savemacros(sid)
 			return
 		}
 		if parts[0] == "!macrolist" {
 			out := ""
 			count := 0
-			for key, _ := range macros {
+			for key, _ := range macros[sid] {
 				out += key + " / "
 				count += 1
 				if count >= 30 {
 					count = 0
-					send(Message{
+					send(sid, Message{
 						Command: NOTICE,
 						Target:	 msg.Source.Nickname,
 						Text:    ""+out,
@@ -78,7 +83,7 @@ func macro(msg Message) {
 					out = ""
 				}
 			}
-			send(Message{
+			send(sid, Message{
 				Command: NOTICE,
 				Target:	 msg.Source.Nickname,
 				Text:    out,
@@ -87,12 +92,12 @@ func macro(msg Message) {
 	}
 }
 
-func savemacros() {
-	bytes,err := json.Marshal(macros)
+func savemacros(sid string) {
+	bytes,err := json.Marshal(macros[sid])
 	if err != nil { 
 		fmt.Printf("CAN'T SAVE MACROS: %s\r\n",err.Error())
 		return
 	}
-	ioutil.WriteFile("macros.json",bytes, 0777)
+	ioutil.WriteFile("macros."+sid+".json",bytes, 0777)
 }
 

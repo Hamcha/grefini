@@ -15,7 +15,7 @@ func initsed() {
 	last = make(map[string]string)
 }
 
-func sed(msg Message) {
+func sed(sid string, msg Message) {
 	if msg.Command == MESSAGE {
 		if len(msg.Text) > 2 && msg.Text[0:2] == "s/" {
 			matches := rep.FindAllStringSubmatch(msg.Text,-1)
@@ -23,7 +23,7 @@ func sed(msg Message) {
 				// Compile regexp
 				rex, err := regexp.Compile(matches[0][1])
 				if err != nil {
-					send(Message{
+					send(sid, Message{
 						Command: MESSAGE,
 						Target: msg.Target,
 						Text: "Regexp error: "+err.Error(),
@@ -42,7 +42,7 @@ func sed(msg Message) {
 					nick = msg.Source.Nickname
 				}
 				out := rex.ReplaceAllString(lastMsg,matches[0][2])
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target: msg.Target,
 					Text: "<"+nick+"> "+out,

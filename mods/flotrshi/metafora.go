@@ -2,7 +2,6 @@ package main
 
 import (
 	"math/rand"
-	"fmt"
 )
 
 var actions []string = []string{
@@ -22,12 +21,12 @@ var objects []string = []string{
     "il trenino",
 }
 
-func meta(msg Message) {
+func meta(sid string, msg Message) {
 	if msg.Command == MESSAGE {
 		if msg.Text == "!metafora" {
 			n := rand.Intn(len(actions))
 			m := rand.Intn(len(objects))
-			send(Message{
+			send(sid, Message{
 				Command: MESSAGE,
 				Target : msg.Target,
 				Text   : actions[n] + " " + objects[m],

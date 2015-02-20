@@ -42,9 +42,9 @@ func initmods() {
 	initviaggi()
 	initurl()
 	initsed()
+	initmarkov()
 
 	inittime("espernet")
-	initmock("espernet")
 	
 	fmt.Println("flotrshi-port - All modules loaded!")
 }
@@ -66,13 +66,13 @@ func main () {
 
 	// Make map
 	modmap = make(map[string][]func(string, Message))
-	modmap["ponychat"] = { quote, macro, ball, meta, viaggi, urldo, sed, mamma, hs, markov }
-	modmap["espernet"] = { macro, urldo, sed, hs, markov, time, mock }
-	modmap["azzurra"]  = { macro, meta, viaggi, urldo, sed, hs, markov }
+	modmap["ponychat"] = []func(string, Message){ quote, macro, ball, meta, viaggi, urldo, sed, mamma, hs, markov }
+	modmap["espernet"] = []func(string, Message){ macro, urldo, sed, hs, markov, dotime, mock }
+	modmap["azzurra"]  = []func(string, Message){ macro, meta, viaggi, urldo, sed, hs, markov }
 
 	// Connect to the proxy
 	var err error
-	sock, err = net.Dial("tcp","127.0.0.1:4314")
+	sock, err = net.Dial("tcp","127.0.0.1:8012")
 	if err != nil { panic(err) }
 	defer sock.Close()
 
@@ -90,7 +90,7 @@ func main () {
 }
 
 func send(servid string, msg Message) {
-	srvmsg = ClientMessage{
+	srvmsg := ClientMessage{
 		ServerId: servid,
 		Message:  msg,
 		DateTime: 0,

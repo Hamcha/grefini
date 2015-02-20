@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"fmt"
 	"io/ioutil"
 	"encoding/json"
 	"net/url"
@@ -10,7 +9,7 @@ import (
 
 var hsurl string = "http://tryhaskell.org/eval"
 
-func hs(msg Message) {
+func hs(sid string, msg Message) {
 	if msg.Command == MESSAGE {
 		if len(msg.Text) < 3 { return }
 		if msg.Text[0:3] == "hs " {
@@ -29,7 +28,7 @@ func hs(msg Message) {
 				} else {
 					out = data.Error
 				}
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target : msg.Target,
 					Text   : out,

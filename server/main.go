@@ -83,23 +83,17 @@ func handleClient(c net.Conn) {
 		if err != nil {
 			break
 		}
-		if len(bytes) > 7 && string(bytes)[0:5] == "GREET" {
-			greet(c, string(bytes)[6:])
+		var cmd irc.ClientMessage
+		err = json.Unmarshal(bytes, &cmd)
+		if err != nil {
+			fmt.Printf("CAN'T PARSE JSON: %s\r\n", err.Error())
+			continue
 		}
-
-		if len(bytes) > 7 && string(bytes)[0:7] == "EXECUTE" {
-			var cmd irc.ClientMessage
-			err := json.Unmarshal(bytes[8:], &cmd)
-			if err != nil {
-				fmt.Printf("CAN'T PARSE JSON: %s\r\n", err.Error())
-				continue
-			}
-			if sid, ok := Servers[cmd.ServerId]; ok {
-				out := irc.Prepare(cmd.Message)
-				fmt.Fprintf(sid.Socket, out)
-			} else {
-				fmt.Printf("UNEXPECTED SERVER ID: %s\r\n", cmd.ServerId)
-			}
+		if sid, ok := Servers[cmd.ServerId]; ok {
+			out := irc.Prepare(cmd.Message)
+			fmt.Fprintf(sid.Socket, out)
+		} else {
+			fmt.Printf("UNEXPECTED SERVER ID: %s\r\n", cmd.ServerId)
 		}
 	}
 	removeCon(c)
@@ -110,7 +104,7 @@ func handleServer(c chan irc.ClientMessage) {
 	for {
 		message = <-c
 		out, _ := json.Marshal(message)
-		broadcast("IRC " + string(out))
+		broadcast(string(out))
 	}
 }
 
@@ -129,23 +123,4 @@ func broadcast(message string) {
 			removeCon(c)
 		}
 	}
-}
-
-func greet(c net.Conn, id string) {
-	var greetMessage Greet
-	greetMessage.ClientId = id
-	greetMessage.Servers = make(map[string]GreetServers)
-	for k, v := range Servers {
-		greetMessage.Servers[k] = GreetServers{
-			ServerInfo: v.ServerInfo,
-			Channels:   v.Channels,
-		}
-	}
-	greetJSON, err := json.Marshal(greetMessage)
-	if err != nil {
-		fmt.Printf("CAN'T GREET: %s\r\n", err.Error())
-		return
-	}
-
-	fmt.Fprintf(c, "GREET "+string(greetJSON)+"\r\n")
 }

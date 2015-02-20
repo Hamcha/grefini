@@ -6,12 +6,12 @@ import (
 	"fmt"
 )
 
-func mock(msg Message) {
+func mock(sid string, msg Message) {
 	if (msg.Command == MESSAGE) {
 		parts := strings.Split(msg.Text, " ")
 		if parts[0] == "!mock" {
 			if len(parts) < 2 {
-				send(Message{
+				send(sid, Message{
 					Command:MESSAGE,
 					Target:	msg.Target,
 					Text:	"fuk u "+msg.Source.Nickname,
@@ -25,7 +25,7 @@ func mock(msg Message) {
 				nick = parts[2]
 			}
 			if nick == msg.Source.Nickname {
-				send(Message{
+				send(sid, Message{
 					Command:MESSAGE,
 					Target:msg.Target,
 					Text: msg.Source.Nickname+": Can't do yourself!",
@@ -33,17 +33,17 @@ func mock(msg Message) {
 				return
 			}
 			if strings.ContainsAny(nick, " ;&,.:<>`#%$()[]{}\"\\'/") {
-				send(Message{
+				send(sid, Message{
 					Command:MESSAGE,
 					Target:msg.Target,
 					Text: "Nice try",
 				})
 				return
 			}
-			bout, err := exec.Command("zsh", "-c", "grep -i \\<"+nick+"\\> /usr/home/znc-admin/.znc/users/Hamcha/moddata/log/logs/*spernet_* | grep -i "+origin+": | sort -R | head -n 1").Output()
+			bout, err := exec.Command("zsh", "-c", "grep -i \\<"+nick+"\\> /znc-logs/*spernet_* | grep -i "+origin+": | sort -R | head -n 1").Output()
 			if err != nil {
 				fmt.Println(err.Error())
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target: msg.Target,
 					Text: "Something's not right..",
@@ -55,7 +55,7 @@ func mock(msg Message) {
 				if origin == msg.Source.Nickname {
 					text = msg.Source.Nickname+": "+nick+" never really fancied you apparently"
 				}
-				send(Message{
+				send(sid, Message{
 					Command: MESSAGE,
 					Target: msg.Target,
 					Text: text,
@@ -68,7 +68,7 @@ func mock(msg Message) {
 			if len(parts) > 2 {
 				extra = " (to " + origin + ")"
 			}
-			send(Message{
+			send(sid, Message{
 				Command:MESSAGE,
 				Target: msg.Target,
 				Text:	msg.Source.Nickname + ": " + nick + " be like \"" + strings.TrimSpace(out) +"\"" + extra,
