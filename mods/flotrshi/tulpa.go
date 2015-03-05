@@ -8,7 +8,7 @@ import (
 var ponies []string = []string{
 	"Princess_Luna", "Princess_Celestia", "Twilight", "Applejack", "Rarity",
 	"Fluttershy", "Rainbow_Dash", "Pinkie_Pie", "Mi_Amore_Cadenza", "Sweetcream",
-	"Aloe",	"Lotus", "Spitfire", "Fleetfoot", "Big_Mac", "Scootaloo",
+	"Aloe", "Lotus", "Spitfire", "Fleetfoot", "Big_Mac", "Scootaloo",
 	"Apple_Bloom", "Sweetie_Belle", "Maud", "Lyra", "BonBon", "Nurse_Redheart",
 	"Berry_Punch", "Button's_Mon", "Cheerilee", "Queen_Chrysalis", "Colgate",
 	"Daring_Do", "Derpy", "Fluffle_Puff", "Gilda", "Littlepip", "Milky_Way",
@@ -40,8 +40,8 @@ func tulpa(sid string, msg Message) {
 			sentence = customize(sentence, n)
 			send(sid, Message{
 				Command: MESSAGE,
-				Target : msg.Target,
-				Text   : "<" + ponies[n] + ">: " + sentence,
+				Target:  msg.Target,
+				Text:    "<" + ponies[n] + ">: " + sentence,
 			})
 			return
 		}
@@ -50,15 +50,15 @@ func tulpa(sid string, msg Message) {
 
 func customize(sentence string, i int) string {
 	switch ponies[i] {
-		case "Maud":
-			return "Roccia. Sei una roccia. Grigia. Sei grigia. Come una roccia. Che è quel che sei. Roccia."
-		case "Fluffle_Puff":
-			return "Prrrrrht."
-		case "Gilda":
-			return "Non toccarmi con le tue manacce sporche, sfigato!"
-		case "Zecora":
-			return "Ricordati, anche in questa buia ora / che almeno non vai in giro col fedora."
-		default:
-			return sentence
+	case "Maud":
+		return "Roccia. Sei una roccia. Grigia. Sei grigia. Come una roccia. Che è quel che sei. Roccia."
+	case "Fluffle_Puff":
+		return "Prrrrrht."
+	case "Gilda":
+		return "Non toccarmi con le tue manacce sporche, sfigato!"
+	case "Zecora":
+		return "Ricordati, anche in questa buia ora / che almeno non vai in giro col fedora."
+	default:
+		return sentence
 	}
 }
