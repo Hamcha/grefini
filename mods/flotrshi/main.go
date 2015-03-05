@@ -66,7 +66,7 @@ func main () {
 
 	// Make map
 	modmap = make(map[string][]func(string, Message))
-	modmap["ponychat"] = []func(string, Message){ quote, macro, ball, meta, viaggi, urldo, sed, mamma, hs, markov }
+	modmap["ponychat"] = []func(string, Message){ quote, macro, ball, meta, viaggi, urldo, sed, mamma, hs, markov, tulpa }
 	modmap["espernet"] = []func(string, Message){ macro, urldo, sed, hs, markov, dotime, mock }
 	modmap["azzurra"]  = []func(string, Message){ macro, meta, viaggi, urldo, sed, hs, markov }
 
